@@ -1,0 +1,40 @@
+# sketch
+star_x = []
+star_y = []
+
+shooting_x = []
+shooting_y = []
+
+def setup():
+    fullScreen()
+    
+    for i in range(400):
+        star_x.append(random(width))
+        star_y.append(random(height))
+        shooting_x.append(random(width))
+        shooting_y.append(random(height))
+    
+def draw():
+
+    background(0)
+
+    for i in range(400):
+        fill(random(255), 0, 0)
+        ellipse(star_x[i], star_y[i], 8, 8)
+        star_x[i] = star_x[i] + 1
+        star_y[i] = star_y[i] + 1
+        if (star_x[i] > width):
+            star_x[i] = random(width)
+        if (star_y[i] > height):
+            star_y[i] = random(height)
+            
+    for i in range(400):
+        yellow = random(255)
+        fill(yellow, yellow, 0)
+        ellipse(shooting_x[i], shooting_y[i], 8, 8)
+        shooting_x[i] = shooting_x[i] - 1
+        shooting_y[i] = shooting_y[i] + 1
+        if (shooting_x[i] < 0):
+            shooting_x[i] = random(width)
+        if (shooting_y[i] > height):
+            shooting_y[i] = random(height)
