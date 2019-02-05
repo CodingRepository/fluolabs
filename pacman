@@ -1,0 +1,59 @@
+pRIGHT = 0
+pDOWN = 90
+pLEFT = 180
+pUP = 270
+
+moth = 45
+mSped = -12
+angle = pRIGHT
+diameter = 80
+
+def setup():
+    global x, y
+    size(640, 360)
+    x = width/2
+    y = height/2
+    
+def draw():
+    global moth, mSped, x, y, angle
+    background(0)
+    
+    fill(255, 255, 0)
+    #ellipse(width/2, height/2, 80, 80)
+    textSize(20)
+    text("moth=" + str(moth), width/2, height/4)
+    text("mSped=" + str(mSped), width/2, height/4 + 20)
+    
+    translate(x, y)
+    rotate(radians(angle))
+    arc(0, 0, diameter, diameter, radians(moth), radians(360 - moth))
+    
+    # update mouth
+    moth += mSped
+    if (moth < 0 or moth > 45):
+        mSped *= -1
+        
+    # update position
+    if (angle == pRIGHT):
+        x += 1
+    elif (angle == pDOWN):
+        y += 1
+    elif (angle == pLEFT):
+        x -= 1
+    elif (angle == pUP):
+        y -= 1
+        
+    # check boundary
+    if (x + (diameter/2) > width):
+        angle = pLEFT
+        
+def keyPressed():
+    global angle, x, y
+    if(keyCode == RIGHT):
+        angle = pRIGHT
+    elif (keyCode == DOWN):
+        angle = pDOWN
+    elif (keyCode == LEFT):
+        angle = pLEFT
+    elif (keyCode == UP):
+        angle = pUP
